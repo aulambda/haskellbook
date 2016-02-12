@@ -1,7 +1,7 @@
 -- wordnumber.hs
 module WordNumber where
 
-import Data.List (intersperse)
+import           Data.List (intersperse)
 
 digitToWord :: Int -> String
 digitToWord n = numNames !! n
@@ -15,3 +15,4 @@ digits x
 
 wordNumber :: Int -> String
 wordNumber n = concat . intersperse "-" . map digitToWord $ digits n
+-- You could also use 'intercalate' from Data.list here, but the exercise encourages 'intersperse', since it makes you think a little harder.
