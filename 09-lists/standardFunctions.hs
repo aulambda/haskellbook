@@ -21,7 +21,7 @@ myElem _ [] = False
 myElem i (x:xs) = x == i || myElem i xs
 
 myElem' :: Eq a => a -> [a] -> Bool
-myElem' i list = myAny ((==) i) list
+myElem' i = myAny (i ==)
 
 myReverse :: [a] -> [a]
 myReverse [] = []
@@ -36,24 +36,24 @@ squishMap _ [] = []
 squishMap f (x:xs) = f x ++ squishMap f xs
 
 squishAgain :: [[a]] -> [a]
-squishAgain list = squishMap (\x -> x) list
+squishAgain = squishMap id
 
 myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
 myMaximumBy _ [] = head []
 myMaximumBy f (x:y:zs)
   | f x y == GT = myMaximumBy f (x:zs)
   | otherwise = myMaximumBy f (y:zs)
-myMaximumBy _ (x:[]) = x
+myMaximumBy _ [x] = x
 
 myMinimumBy :: (a -> a -> Ordering) -> [a] -> a
 myMinimumBy _ [] = head []
 myMinimumBy f (x:y:zs)
   | f x y == LT = myMinimumBy f (x:zs)
   | otherwise = myMinimumBy f (y:zs)
-myMinimumBy _ (x:[]) = x
+myMinimumBy _ [x] = x
 
 myMaximum :: (Ord a) => [a] -> a
-myMaximum ls = myMaximumBy compare ls
+myMaximum = myMaximumBy compare
 
 myMinimum :: (Ord a) => [a] -> a
-myMinimum ls = myMinimumBy compare ls
+myMinimum = myMinimumBy compare
